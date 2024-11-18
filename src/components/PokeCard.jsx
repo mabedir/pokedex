@@ -174,22 +174,22 @@ export default function PokeCard(props) {
       </div>
       <h3>Moves</h3>
       <div className="pokemon-move-grid">
-        {moves.map((moveObj, moveIndex) => {
-          return (
-            <button
-              className="pokemon-move"
-              key={moveIndex}
-              onClick={() => {
-                fetchMoveData(moveObj?.move?.name, moveObj?.move?.url);
-              }}
-            >
-              <p>{moveObj?.move?.name.replaceAll('-', ' ')}</p>
-            </button>
-          );
-        })}
+        {moves
+          .sort((a, b) => a.move.name.localeCompare(b.move.name))
+          .map((moveObj, moveIndex) => {
+            return (
+              <button
+                className="pokemon-move"
+                key={moveIndex}
+                onClick={() => {
+                  fetchMoveData(moveObj?.move?.name, moveObj?.move?.url);
+                }}
+              >
+                <p>{moveObj?.move?.name.replaceAll('-', ' ')}</p>
+              </button>
+            );
+          })}
       </div>
     </div>
   );
 }
-
-// challange => alphabeticly order the skills
